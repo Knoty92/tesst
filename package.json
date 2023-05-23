@@ -1,0 +1,39 @@
+{
+  "name": "start-template",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "e2e": "cypress open",
+    "e2e-ci": "cypress run",
+    "lint": "eslint ./src --ext .ts --ext .vue --ext .js"
+  },
+  "dependencies": {
+    "@cypress/vite-dev-server": "^3.1.1",
+    "@cypress/vue": "^4.1.0",
+    "cypress": "^10.5.0",
+    "firebase": "^9.15.0",
+    "pinia": "^2.0.0-rc.10",
+    "pixi-viewport": "^4.38.0",
+    "pixi.js": "^6.5.8",
+    "sass": "^1.58.0",
+    "socket.io-client": "^4.6.1",
+    "vue": "^3.2.37"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.50.0",
+    "@typescript-eslint/parser": "^5.50.0",
+    "@vitejs/plugin-vue": "^3.0.3",
+    "eslint": "^8.33.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-vue": "^9.9.0",
+    "prettier": "2.7.1",
+    "typescript": "^4.6.4",
+    "vite": "^3.0.7",
+    "vite-plugin-eslint": "^1.8.1",
+    "vue-tsc": "^0.39.5"
+  }
+}

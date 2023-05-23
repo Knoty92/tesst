@@ -1,0 +1,14 @@
+.base-button {
+  background: $primary;
+  color: $blank;
+  border: none;
+  height: 40px;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: $primary-light;
+  }
+}

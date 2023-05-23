@@ -1,0 +1,42 @@
+.scale-center-enter-active {
+	animation: scale-center 0.5s;
+}
+
+.scale-center-leave-active {
+	animation: scale-center 0.5s reverse;
+}
+
+@keyframes scale-center {
+	0% {
+		transform: scale(0) translate(-50%, -50%);
+		transform-origin: left;
+	}
+	50% {
+		transform: scale(1.25) translate(-50%, -50%);
+		transform-origin: left;
+	}
+	100% {
+		transform: scale(1) translate(-50%, -50%);
+		transform-origin: left;
+	}
+}
+
+.scale-enter-active {
+	animation: scale 0.5s;
+}
+
+.scale-leave-active {
+	animation: scale 0.5s reverse;
+}
+
+@keyframes scale {
+	0% {
+		transform: scale(0);
+	}
+	50% {
+		transform: scale(1.25);
+	}
+	100% {
+		transform: scale(1);
+	}
+}

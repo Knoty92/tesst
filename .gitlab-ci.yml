@@ -1,0 +1,48 @@
+image: node:17-alpine
+
+stages:
+     - buildAndLint
+#    - e2e_cypress
+#    - deploy
+
+build_and_lint:
+    rules:
+        - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    stage: buildAndLint
+    before_script:
+        - apk update && apk add gettext
+        - npm i -g firebase-tools
+        - npm ci
+    script:
+        - npm run lint
+        - npm run build
+
+# deploy_stage:
+#     stage: deploy
+#     only:
+#         - /^main$/
+#     before_script:
+#         - apk update && apk add gettext
+#         - npm i -g firebase-tools
+#         - npm ci
+#     script:
+#         - cat .env
+#         - npm run build
+#         - echo $FIREBASE_TOKEN
+#         - firebase deploy -m "Pipeline $CI_PIPELINE_ID, build $CI_BUILD_ID" --non-interactive --token $FIREBASE_TOKEN
+
+#test:
+#    rules:
+#        - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+#    image: cypress/browsers:node16.14.2-slim-chrome100-ff99-edge
+#    stage: e2e_cypress
+#    script:
+#        - npm ci
+#        - npm run dev &
+#        - npm run e2e-ci
+#    artifacts:
+#        when: always
+#        paths:
+#            - cypress/videos/**/*.mp4
+#           - cypress/screenshots/**/*.png
+#        expire_in: 1 day
