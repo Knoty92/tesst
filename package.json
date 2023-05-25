@@ -17,10 +17,12 @@
     "cypress": "^10.5.0",
     "firebase": "^9.15.0",
     "pinia": "^2.0.0-rc.10",
+    "pixi-action": "^1.0.2",
     "pixi-viewport": "^4.38.0",
     "pixi.js": "^6.5.8",
     "sass": "^1.58.0",
     "socket.io-client": "^4.6.1",
+    "tween.js": "^16.6.0",
     "vue": "^3.2.37"
   },
   "devDependencies": {
