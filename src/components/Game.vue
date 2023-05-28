@@ -7,9 +7,8 @@ import { onMounted, ref, watch, onBeforeUnmount } from 'vue'
 
 import * as PIXI from 'pixi.js'
 
-import * as TWEEN from 'tween.js'
-
 import { Viewport } from 'pixi-viewport'
+import { Ticker, TickerCallback } from 'pixi.js'
 
 
   
@@ -77,29 +76,72 @@ onMounted(() => {
 
   viewport.on('pointerdown', (e) => {
 
-    /*app.ticker.add(() => {
-      point.x += 1
-    })*/
+    const velocity = 1
 
-    const pos = viewport.toWorld(e.data.global)
+    console.log(point.position)
 
-    point.position.set(pos.x, pos.y)
+    const currentPos = {
+      x: point.position.x,
+      y: point.position.y
+    }
+    const targetPos = viewport.toWorld(e.data.global)
 
-    console.log(point)
+    const distance = Math.sqrt(Math.pow(Math.abs(currentPos.x - targetPos.x), 2) + Math.pow(Math.abs(currentPos.y - targetPos.y), 2))
 
-    /*setTimeout(() => {
-    
-    }, 5000)
+    const ratio = {
+      x: Math.abs(currentPos.x - targetPos.x) / (Math.abs(currentPos.x - targetPos.x) + Math.abs(currentPos.y - targetPos.y)),
+      y: Math.abs(currentPos.y - targetPos.y) / (Math.abs(currentPos.x - targetPos.x) + Math.abs(currentPos.y - targetPos.y))
+    }
 
-    const viewportCoordinates = e.data.global
+    const speed = velocity / Math.sqrt(ratio.x * ratio.x + ratio.y * ratio.y);
 
-    console.log(viewportCoordinates)
-    point.position = viewportCoordinates.x
-    point.position.y = viewportCoordinates.y
+    console.log(distance / speed)
 
-    console.log(point)*/
+    const ticker = new PIXI.Ticker
+
+    let travelled = 0
+
+    ticker.add(() => {
+      if (targetPos.x >= currentPos.x) {
+      point.x += speed * ratio.x
+      } else {
+        point.x -= speed * ratio.x
+      }
+
+      if (targetPos.y >= currentPos.y) {
+        point.y += speed * ratio.y
+      } else {
+        point.y -= speed * ratio.y
+      }
+
+      travelled += 1
+
+      if (travelled >= distance) {
+        ticker.destroy()
+      }
+    })
+
+    ticker.start()
     
   });
+
+  const moveObject = (targetPos: {x: number, y: number}, currentPos:  {x: number, y: number}, speed: number, ratio: {x: number, y: number}): void => {
+      const ticker = new PIXI.Ticker
+
+      ticker.add(() => {
+        if (targetPos.x >= currentPos.x) {
+        point.x += speed * ratio.x
+        } else {
+          point.x -= speed * ratio.x
+        }
+
+        if (targetPos.y >= currentPos.y) {
+          point.y += speed * ratio.y
+        } else {
+          point.y -= speed * ratio.y
+        }
+      })
+  }
 
   console.log(graphics)
 })
